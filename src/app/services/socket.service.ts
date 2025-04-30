@@ -9,7 +9,7 @@ export class SocketService {
   private readonly socket: Socket;
 
   constructor() {
-    this.socket = io('ws://localhost:8002/', {
+    this.socket = io('wss://hook.tiltbr.com.br:8003/', {
       transports: ['websocket'],
       upgrade: false,
       autoConnect: false
