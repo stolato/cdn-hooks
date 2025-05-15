@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SocketService} from '../../services/socket.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {share} from 'rxjs';
+import {ApiService} from '../../services/api.service';
 
 export interface Item {
   data: any;
@@ -21,7 +24,10 @@ export class HomepageComponent implements OnInit {
   constructor(
     private socketService: SocketService,
     private router: Router,
-    private route: ActivatedRoute,) {
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private apiService: ApiService,
+    ) {
   }
 
   items: Item[] = [];
@@ -43,4 +49,22 @@ export class HomepageComponent implements OnInit {
       console.log()
     })
   }
+
+  alertCopy() {
+    this.snackBar.open('Copied to clipboard', 'Close', {
+      duration: 2000,
+    });
+  }
+
+  share(data: any){
+    if(data !== null){
+      this.apiService.shareJson(data).subscribe((res: any)=> {
+        window.open("https://jsonedit.com.br/" + res.InsertedID, '_blank');
+      });
+    }
+
+    this.snackBar.open('Json shared', 'Close', {
+      duration: 2000,
+    })
+  };
 }

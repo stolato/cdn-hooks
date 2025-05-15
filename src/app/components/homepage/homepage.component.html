@@ -11,10 +11,16 @@
             </svg>
         </span>
       <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-xs sm:flex dark:bg-gray-700 dark:border-gray-600">
-        <div class="text-sm font-normal text-gray-500 dark:text-gray-300">
+        <div class="text-sm font-normal text-gray-500 dark:text-gray-300 flex">
           Link do hook
           <span class="bg-gray-100 text-gray-800 text-xs font-normal me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-600 dark:text-gray-300">
             https://hook.tiltbr.com.br/{{this.id}}
+          </span>
+          <span [cdkCopyToClipboard]="'https://hook.tiltbr.com.br/'+id" (click)="alertCopy()" class="cursor-pointer">
+            <svg class="w-3.5 h-3.5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <path d="M5 9V4.13a2.96 2.96 0 0 0-1.293.749L.879 7.707A2.96 2.96 0 0 0 .13 9H5Zm11.066-9H9.829a2.98 2.98 0 0 0-2.122.879L7 1.584A.987.987 0 0 0 6.766 2h4.3A3.972 3.972 0 0 1 15 6v10h1.066A1.97 1.97 0 0 0 18 14V2a1.97 1.97 0 0 0-1.934-2Z"></path>
+                    <path d="M11.066 4H7v5a2 2 0 0 1-2 2H0v7a1.969 1.969 0 0 0 1.933 2h9.133A1.97 1.97 0 0 0 13 18V6a1.97 1.97 0 0 0-1.934-2Z"></path>
+                  </svg>
           </span>
         </div>
       </div>
@@ -29,25 +35,34 @@
             </svg>
         </span>
       <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-700 dark:border-gray-600">
-        <div class="items-center justify-between mb-3 sm:flex">
-          <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{ item.time }}</time>
+        <div class="items-center justify-between mb-1 sm:flex">
+          <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0 flex items-center"><mat-icon class="text-gray-400 mr-2">history</mat-icon>{{ item.time }}</time>
         </div>
-        <div class="p-3 text-xs italic font-normal text-white">
+        <div class="p-2 text-xs italic font-normal text-white">
           METHOD:
           <span *ngIf="item.method === 'POST'" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">POST</span>
           <span *ngIf="item.method === 'GET'" class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">GET</span>
           <span *ngIf="item.method === 'PUT'" class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-yellow-900 dark:text-yellow-300">PUT</span>
           <span *ngIf="item.method === 'DELETE'" class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">DELETE</span>
         </div>
+        <div class="items-center justify-between sm:flex">
+          <div class="w-full m-0 title max-h-72">
+            Body:
+          </div>
+          <div class="w-full m-0 title max-h-72">
+            Header:
+          </div>
+        </div>
         <div class="items-center justify-between mb-3 sm:flex">
           <div
-            class="p-3 text-xs italic font-normal text-gray-500 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 w-full max-h-72 overflow-y-auto">
-            <p>Body:</p>
+            class="p-3 text-xs italic font-normal relative text-gray-500 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 w-full max-h-72 overflow-y-auto min-h-72">
             <pre>{{item.data | json}}</pre>
+            <div class="share" matTooltip="Share">
+              <mat-icon class="cursor-pointer" aria-label="Share" (click)="share(item.data)">share</mat-icon>
+            </div>
           </div>
           <div
-            class="p-3 text-xs italic font-normal text-gray-500 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 w-full m-2 max-h-72 overflow-y-auto">
-            Header:
+            class="p-3 text-xs italic font-normal text-gray-500 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 w-full m-2 max-h-72 overflow-y-auto min-h-72">
             <pre>{{item.header | json}}</pre>
           </div>
         </div>

@@ -1,0 +1,17 @@
+.title{
+  margin: 0 0 0 7px;
+  color: #FFF;
+  font-size: 12px;
+  border-bottom: #202020 1px solid;
+  padding: 0 0 5px;
+}
+
+.share{
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 36px;
+  padding: 4px;
+  padding-bottom: 1px;
+}
